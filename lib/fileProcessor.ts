@@ -3,7 +3,8 @@ export async function processPDF(file: File): Promise<string> {
   try {
     const pdfParse = await import('pdf-parse/lib/pdf-parse.js');
     const arrayBuffer = await file.arrayBuffer();
-    const data = await pdfParse.default(arrayBuffer);
+    const buffer = Buffer.from(arrayBuffer);
+    const data = await pdfParse.default(buffer);
     
     if (!data || !data.text) {
       throw new Error('PDF файлд текст олдсонгүй. / No text found in PDF file.');
