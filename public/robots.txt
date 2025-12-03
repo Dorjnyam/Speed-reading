@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow API routes
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://speedreader.app/sitemap.xml
+
