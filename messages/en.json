@@ -1,0 +1,75 @@
+{
+  "app": {
+    "title": "Speed Reader",
+    "subtitle": "Read faster, comprehend better"
+  },
+  "fileUploader": {
+    "uploadDocument": "Upload Document",
+    "dragDrop": "Drag and drop your file here, or click to browse",
+    "chooseFile": "Choose File",
+    "processing": "Processing...",
+    "fileProcessingError": "File Processing Error",
+    "supportedFormats": "Supported Formats",
+    "maxFileSize": "Maximum file size: 50MB",
+    "orPasteText": "Or paste text directly",
+    "pasteTextPlaceholder": "Paste your text here to start speed reading...",
+    "words": "words",
+    "loadText": "Load Text",
+    "unsupportedFormat": "Unsupported file format. Please use PDF, DOCX, or TXT files.",
+    "fileSizeExceeded": "File size exceeds 50MB limit",
+    "noTextContent": "No text content found in the file",
+    "insufficientText": "File contains insufficient text content"
+  },
+  "speedReader": {
+    "noTextSelected": "Select text to begin",
+    "pause": "Pause",
+    "play": "Play",
+    "reset": "Reset",
+    "wordsPerMinute": "Words Per Minute",
+    "wordsAtOnce": "Words at Once",
+    "options": "Reading Options",
+    "showContext": "Show Context",
+    "pauseOnPunctuation": "Pause on Punctuation",
+    "textPreview": "Text Preview",
+    "noTextPreview": "Upload or paste text to see preview",
+    "keyboardShortcuts": "Keyboard Shortcuts",
+    "playPause": "Play/Pause",
+    "adjustSpeed": "Adjust Speed",
+    "navigate": "Navigate",
+    "readingSession": "Reading Session",
+    "loadNewText": "Load New Text"
+  },
+  "pages": {
+    "index": {
+      "title": "Read at 300-400+ WPM",
+      "subtitle": "Use the scientifically proven RSVP (Rapid Serial Visual Presentation) technique to dramatically improve your reading speed while maintaining comprehension.",
+      "lightningFast": "Lightning Fast",
+      "lightningFastDesc": "Eliminate distractions and improve concentration by focusing on one word at a time.",
+      "multipleFormats": "Multiple Formats",
+      "multipleFormatsDesc": "Support for TXT, PDF, DOCX files, or simply paste your text directly.",
+      "betterFocus": "Better Focus",
+      "betterFocusDesc": "Reduce eye movement and improve concentration with optimal reading point highlighting.",
+      "orPasteText": "Or paste your text here:",
+      "pastePlaceholder": "Paste your text here to start speed reading...",
+      "characters": "characters",
+      "words": "words",
+      "clear": "Clear",
+      "startReading": "Start Reading",
+      "speedReadingTips": "Speed Reading Tips",
+      "tip1Title": "Start Slow",
+      "tip1Desc": "Begin with 200-250 WPM and gradually increase as you get comfortable.",
+      "tip2Title": "Focus on the Center",
+      "tip2Desc": "Look at the red highlighted character - this is the optimal reading point.",
+      "tip3Title": "Minimize Subvocalization",
+      "tip3Desc": "Try not to \"hear\" the words in your head - just absorb the meaning.",
+      "tip4Title": "Practice Regularly",
+      "tip4Desc": "Consistent practice is key to building and maintaining speed reading skills.",
+      "tip5Title": "Use Keyboard Shortcuts",
+      "tip5Desc": "Master the keyboard shortcuts for a seamless reading experience.",
+      "tip6Title": "Adjust Settings",
+      "tip6Desc": "Experiment with different WPM speeds and chunk sizes to find your optimal settings.",
+      "footerDesc": "Boost your reading speed and comprehension with scientifically proven techniques."
+    }
+  }
+}
+
