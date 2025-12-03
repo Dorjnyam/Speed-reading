@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 
 export function useSpeedReader(text: string) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -16,11 +16,13 @@ export function useSpeedReader(text: string) {
   const isPlayingRef = useRef(false);
   const punctuationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Process text into words
-  const words = text
-    .split(/\s+/)
-    .filter((word) => word.trim().length > 0)
-    .map((word) => word.trim());
+  // Process text into words - memoized to prevent recalculation
+  const words = useMemo(() => {
+    return text
+      .split(/\s+/)
+      .filter((word) => word.trim().length > 0)
+      .map((word) => word.trim());
+  }, [text]);
 
   const hasText = words.length > 0;
   const totalWords = words.length;
@@ -59,10 +61,17 @@ export function useSpeedReader(text: string) {
   }, [clearAllTimers]);
 
   const startReading = useCallback(() => {
-    // Clear all existing timers
-    clearAllTimers();
+    // CRITICAL: Clear ALL timers synchronously first to prevent race conditions
+    if (intervalIdRef.current) {
+      clearInterval(intervalIdRef.current);
+      intervalIdRef.current = null;
+    }
+    if (punctuationTimeoutRef.current) {
+      clearTimeout(punctuationTimeoutRef.current);
+      punctuationTimeoutRef.current = null;
+    }
 
-    // Don't start if not supposed to be playing
+    // Double-check we should still be playing
     if (!isPlayingRef.current) {
       return;
     }
@@ -80,7 +89,14 @@ export function useSpeedReader(text: string) {
     const advanceWord = () => {
       // Double check if still playing
       if (!isPlayingRef.current) {
-        clearAllTimers();
+        if (intervalIdRef.current) {
+          clearInterval(intervalIdRef.current);
+          intervalIdRef.current = null;
+        }
+        if (punctuationTimeoutRef.current) {
+          clearTimeout(punctuationTimeoutRef.current);
+          punctuationTimeoutRef.current = null;
+        }
         return;
       }
 
@@ -101,13 +117,16 @@ export function useSpeedReader(text: string) {
 
         // If punctuation detected, pause longer but don't stop
         if (hasPunctuation && nextIndex < totalWords - chunkSize) {
-          // Clear current interval
-          clearAllTimers();
+          // Clear current interval synchronously
+          if (intervalIdRef.current) {
+            clearInterval(intervalIdRef.current);
+            intervalIdRef.current = null;
+          }
           
           // Resume after pause
           punctuationTimeoutRef.current = setTimeout(() => {
             // Check if still playing before resuming
-            if (isPlayingRef.current) {
+            if (isPlayingRef.current && !intervalIdRef.current) {
               intervalIdRef.current = setInterval(advanceWord, interval);
             }
           }, interval * 1.5);
@@ -120,7 +139,7 @@ export function useSpeedReader(text: string) {
     };
 
     intervalIdRef.current = setInterval(advanceWord, interval);
-  }, [totalWords, chunkSize, wpm, pauseOnPunctuation, startTime, words, stopReading, clearAllTimers]);
+  }, [totalWords, chunkSize, wpm, pauseOnPunctuation, startTime, words, stopReading]);
 
   const toggleReading = useCallback(() => {
     if (!hasText) return;
@@ -156,26 +175,35 @@ export function useSpeedReader(text: string) {
     (amount: number) => {
       setWpm((prev) => {
         const newWPM = prev + amount;
-        if (newWPM >= 100 && newWPM <= 1000) {
-          // If playing, stop and restart with new WPM
-          const wasPlaying = isPlayingRef.current;
-          if (wasPlaying) {
-            // Clear timers but keep playing state
-            clearAllTimers();
-            // Use requestAnimationFrame to ensure state is updated before restarting
-            requestAnimationFrame(() => {
-              // Check if still supposed to be playing
-              if (isPlayingRef.current) {
-                startReading();
-              }
-            });
-          }
-          return newWPM;
+        // Validate range before proceeding
+        if (newWPM < 100 || newWPM > 1000) {
+          return prev; // Don't change WPM outside valid range
         }
-        return prev;
+
+        // If playing, we need to restart with new WPM
+        if (isPlayingRef.current) {
+          // Clear timers synchronously
+          if (intervalIdRef.current) {
+            clearInterval(intervalIdRef.current);
+            intervalIdRef.current = null;
+          }
+          if (punctuationTimeoutRef.current) {
+            clearTimeout(punctuationTimeoutRef.current);
+            punctuationTimeoutRef.current = null;
+          }
+          
+          // Schedule restart on next frame to ensure clean state
+          requestAnimationFrame(() => {
+            if (isPlayingRef.current) {
+              startReading();
+            }
+          });
+        }
+        
+        return newWPM;
       });
     },
-    [startReading, clearAllTimers]
+    [startReading]
   );
 
   const jumpToPosition = useCallback(

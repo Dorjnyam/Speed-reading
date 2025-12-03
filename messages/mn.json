@@ -37,7 +37,16 @@
     "adjustSpeed": "Хурд тохируулах",
     "navigate": "Навигаци",
     "readingSession": "Уншлагын хугацаа",
-    "loadNewText": "Шинэ текст ачаалах"
+    "loadNewText": "Шинэ текст ачаалах",
+    "readingProgress": "Уншлагын явц",
+    "currentWPM": "Одоогийн WPM",
+    "wordsRead": "Уншсан үг",
+    "timeReading": "Уншсан хугацаа",
+    "quickJump": "Хурдан шилжих",
+    "start": "Эхлэх",
+    "wordPosition": "{current}/{total} үг",
+    "remainingTime": "{seconds}с үлдсэн",
+    "positionSlider": "Уншлагын байрлалын слайдер"
   },
   "pages": {
     "index": {

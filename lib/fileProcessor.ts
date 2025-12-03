@@ -1,10 +1,5 @@
 // PDF processing (server-only)
 export async function processPDF(file: File): Promise<string> {
-  // Ensure this only runs on server
-  if (typeof window !== 'undefined') {
-    throw new Error('PDF processing must be done on the server');
-  }
-
   try {
     const pdfParse = await import('pdf-parse/lib/pdf-parse.js');
     const arrayBuffer = await file.arrayBuffer();

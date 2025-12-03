@@ -261,6 +261,39 @@ const progressInterval = setInterval(() => {
 6. ✅ Localization зөв ажиллана
 7. ✅ Theme provider зөв ажиллана
 
+## 🔧 Шинээр зассан зүйлс (Newly Fixed)
+
+### Critical Fixes
+1. ✅ **useSpeedReader.ts** - Words array memoization нэмсэн
+   - `useMemo` ашиглан performance сайжруулсан
+   - Text өөрчлөгдөх бүрт дахин тооцоолохгүй
+
+2. ✅ **useSpeedReader.ts** - Timer race condition зассан
+   - Timer-уудыг синхрончоор цэвэрлэх
+   - Multiple interval-ийн асуудлыг шийдсэн
+   - `advanceWord` функцэд interval шалгалт нэмсэн
+
+3. ✅ **useSpeedReader.ts** - adjustWPM логик сайжруулсан
+   - Range validation сайжруулсан
+   - Timer cleanup синхрончоор хийгдэнэ
+   - Double restart асуудал шийдэгдсэн
+
+4. ✅ **useFileProcessor.ts** - Fake progress bar-ийг бодит progress болгосон
+   - Бодит API response-ийн дагуу progress шинэчилнэ
+   - Error гарвал progress 0 болно
+   - Step-by-step progress tracking
+
+5. ✅ **ProgressBar.tsx** - i18n support нэмсэн
+   - Бүх hardcoded текст-ийг i18n-д шилжүүлсэн
+   - `useTranslations` hook ашигласан
+
+6. ✅ **fileProcessor.ts** - Unnecessary server check арилгасан
+   - API route-д зөвхөн ажилладаг тул check шаардлагагүй
+
+7. ✅ **messages/en.json & mn.json** - ProgressBar-ийн текст нэмсэн
+   - `readingProgress`, `currentWPM`, `wordsRead`, `timeReading`
+   - `quickJump`, `start`, `wordPosition`, `remainingTime`, `positionSlider`
+
 ## 🔄 Дараагийн алхам (Next Steps)
 
 1. **Immediate**

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   PlayIcon,
@@ -41,6 +41,24 @@ export function SpeedReader({ text }: SpeedReaderProps) {
     jumpToPosition,
     words
   } = useSpeedReader(text);
+
+  // Calculate dynamic font size based on word length
+  const wordFontSize = useMemo(() => {
+    if (!currentWord) return 'clamp(3rem, 12vw, 6rem)';
+    
+    const wordLength = currentWord.length;
+    if (wordLength > 30) {
+      return 'clamp(1rem, 6vw, 2.5rem)';
+    } else if (wordLength > 20) {
+      return 'clamp(1.5rem, 8vw, 3.5rem)';
+    } else if (wordLength > 15) {
+      return 'clamp(2rem, 10vw, 4.5rem)';
+    } else if (wordLength > 10) {
+      return 'clamp(2.5rem, 11vw, 5rem)';
+    } else {
+      return 'clamp(3rem, 12vw, 6rem)';
+    }
+  }, [currentWord]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -114,14 +132,18 @@ export function SpeedReader({ text }: SpeedReaderProps) {
             </div>
 
             <div
-              className={`font-mono text-6xl md:text-8xl font-bold text-gray-900 dark:text-white tracking-wider leading-none min-h-[120px] flex items-center justify-center ${
+              className={`font-mono font-bold text-gray-900 dark:text-white tracking-wider leading-none min-h-[120px] flex items-center justify-center px-4 overflow-hidden ${
                 isPlaying ? 'animate-pulse' : ''
               }`}
             >
               {currentWord ? (
                 <span
-                  className="relative inline-block text-white"
-                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+                  className="relative inline-block text-white break-words max-w-full text-center"
+                  style={{
+                    textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    fontSize: wordFontSize,
+                    lineHeight: '1.2'
+                  }}
                 >
                   {currentWord.split('').map((char, index) => (
                     <span key={index}>{char}</span>
@@ -137,12 +159,12 @@ export function SpeedReader({ text }: SpeedReaderProps) {
             {/* Word context */}
             {showContext && currentWord && (
               <div className="mt-6 space-y-2">
-                <div className="text-sm text-gray-500 dark:text-gray-400 space-x-4">
-                  <span className="opacity-60">{getPreviousWord()}</span>
-                  <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                <div className="text-sm text-gray-500 dark:text-gray-400 space-x-4 flex flex-wrap items-center justify-center gap-2 px-4">
+                  <span className="opacity-60 break-words max-w-xs">{getPreviousWord()}</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold break-words max-w-md">
                     {currentWord}
                   </span>
-                  <span className="opacity-60">{getNextWord()}</span>
+                  <span className="opacity-60 break-words max-w-xs">{getNextWord()}</span>
                 </div>
               </div>
             )}

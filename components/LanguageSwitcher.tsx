@@ -15,12 +15,14 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
 
   const switchLocale = (newLocale: string) => {
-    // Get current pathname
+    // Get current pathname - next-intl returns pathname without locale prefix
     const currentPath = pathname;
     
-    // Remove current locale prefix if exists
+    // next-intl's usePathname() already returns pathname without locale prefix
+    // So if we're on /mn, pathname might be '/' or '/mn' depending on next-intl version
     let pathWithoutLocale = currentPath;
     
+    // Remove locale prefix if it exists in the pathname
     // Check each locale and remove if found
     for (const loc of locales) {
       const localePrefix = `/${loc}`;
@@ -47,8 +49,8 @@ export function LanguageSwitcher() {
     // Build new path with new locale
     let newPath: string;
     if (newLocale === defaultLocale) {
-      // Default locale (en) - no prefix
-      newPath = pathWithoutLocale;
+      // Default locale (en) - no prefix, just use the path
+      newPath = pathWithoutLocale === '/' ? '/' : pathWithoutLocale;
     } else {
       // Non-default locale (mn) - add prefix
       if (pathWithoutLocale === '/') {
@@ -58,8 +60,15 @@ export function LanguageSwitcher() {
       }
     }
     
+    // Set a cookie to remember the user's locale choice
+    // This prevents middleware from redirecting based on browser locale
+    if (typeof document !== 'undefined') {
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    }
+    
     // Navigate to new path
-    router.replace(newPath);
+    // Use router.push instead of replace to ensure navigation happens
+    router.push(newPath);
   };
 
   return (

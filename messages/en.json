@@ -37,7 +37,16 @@
     "adjustSpeed": "Adjust Speed",
     "navigate": "Navigate",
     "readingSession": "Reading Session",
-    "loadNewText": "Load New Text"
+    "loadNewText": "Load New Text",
+    "readingProgress": "Reading Progress",
+    "currentWPM": "Current WPM",
+    "wordsRead": "Words Read",
+    "timeReading": "Time Reading",
+    "quickJump": "Quick Jump",
+    "start": "Start",
+    "wordPosition": "Word {current} of {total}",
+    "remainingTime": "{seconds}s remaining",
+    "positionSlider": "Reading position slider"
   },
   "pages": {
     "index": {
