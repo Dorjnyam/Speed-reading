@@ -121,10 +121,10 @@ export function SpeedReader({ text }: SpeedReaderProps) {
   const getNextWord = () => words[currentWordIndex + 1] || '';
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
       {/* Main Reader Display */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl p-8 shadow-lg border border-blue-100 dark:border-gray-700">
-        <div className="text-center space-y-8">
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-blue-100 dark:border-gray-700">
+        <div className="text-center space-y-4 sm:space-y-6 md:space-y-8">
           {/* Focus Point and Word Display */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -132,7 +132,7 @@ export function SpeedReader({ text }: SpeedReaderProps) {
             </div>
 
             <div
-              className={`font-mono font-bold text-gray-900 dark:text-white tracking-wider leading-none min-h-[120px] flex items-center justify-center px-4 overflow-hidden ${
+              className={`font-mono font-bold text-gray-900 dark:text-white tracking-wider leading-none min-h-[100px] sm:min-h-[120px] md:min-h-[150px] flex items-center justify-center px-2 sm:px-4 overflow-hidden ${
                 isPlaying ? 'animate-pulse' : ''
               }`}
             >
@@ -150,7 +150,7 @@ export function SpeedReader({ text }: SpeedReaderProps) {
                   ))}
                 </span>
               ) : (
-                <span className="text-gray-400 dark:text-gray-600 text-4xl">
+                <span className="text-gray-400 dark:text-gray-600 text-2xl sm:text-3xl md:text-4xl">
                   {t('speedReader.noTextSelected')}
                 </span>
               )}
@@ -171,11 +171,11 @@ export function SpeedReader({ text }: SpeedReaderProps) {
           </div>
 
           {/* Controls */}
-          <div className="flex justify-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <button
               disabled={!hasText}
               onClick={toggleReading}
-              className={`flex items-center space-x-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ${
+              className={`flex items-center justify-center space-x-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base text-white transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95 sm:hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ${
                 isPlaying
                   ? 'bg-red-500 hover:bg-red-600'
                   : 'bg-green-500 hover:bg-green-600'
@@ -183,12 +183,12 @@ export function SpeedReader({ text }: SpeedReaderProps) {
             >
               {isPlaying ? (
                 <>
-                  <PauseIcon className="w-6 h-6" />
+                  <PauseIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                   <span>{t('speedReader.pause')}</span>
                 </>
               ) : (
                 <>
-                  <PlayIcon className="w-6 h-6" />
+                  <PlayIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                   <span>{t('speedReader.play')}</span>
                 </>
               )}
@@ -197,16 +197,16 @@ export function SpeedReader({ text }: SpeedReaderProps) {
             <button
               disabled={!hasText}
               onClick={resetReading}
-              className="flex items-center space-x-2 px-6 py-4 rounded-xl font-semibold text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center space-x-2 px-5 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <ArrowPathIcon className="w-5 h-5" />
+              <ArrowPathIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{t('speedReader.reset')}</span>
             </button>
           </div>
 
           {/* Speed Controls */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               {/* WPM Control */}
               <div className="space-y-3">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -300,7 +300,7 @@ export function SpeedReader({ text }: SpeedReaderProps) {
       </div>
 
       {/* Progress and Stats Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <ProgressBar
           progress={progress}
           currentWordIndex={currentWordIndex}
@@ -314,11 +314,11 @@ export function SpeedReader({ text }: SpeedReaderProps) {
         />
 
         {/* Text Preview */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-3 sm:p-4">
+          <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-2 sm:mb-3">
             {t('speedReader.textPreview')}
           </h3>
-          <div className="max-h-48 overflow-y-auto text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          <div className="max-h-32 sm:max-h-48 overflow-y-auto text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
             {!hasText ? (
               <p className="italic">{t('speedReader.noTextPreview')}</p>
             ) : (
@@ -353,11 +353,11 @@ export function SpeedReader({ text }: SpeedReaderProps) {
       </div>
 
       {/* Keyboard Shortcuts */}
-      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-        <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+      <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 sm:p-4">
+        <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-white mb-2 sm:mb-3">
           {t('speedReader.keyboardShortcuts')}
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm">
           <div className="flex items-center space-x-2">
             <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-xs">
               Space

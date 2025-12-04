@@ -59,26 +59,26 @@ export function MainPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                <BookOpenIcon className="w-6 h-6 text-white" />
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <BookOpenIcon className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {t('app.title')}
                 </h1>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                   {t('app.subtitle')}
                 </p>
               </div>
             </div>
 
             {/* Language Switcher and Theme Toggle */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-between sm:justify-end">
               <LanguageSwitcher />
 
               <button
@@ -99,12 +99,12 @@ export function MainPage() {
 
         {/* Welcome Section */}
         {!currentText && (
-          <div className="text-center space-y-8 mb-12">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+          <div className="text-center space-y-6 sm:space-y-8 mb-8 sm:mb-12">
+            <div className="space-y-3 sm:space-y-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white px-2">
                 {t('pages.index.title')}
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4">
                 {t('pages.index.subtitle')}
               </p>
             </div>
@@ -154,19 +154,19 @@ export function MainPage() {
         {/* Speed Reader Component */}
         {currentText && (
           <div>
-            <div className="mb-6 flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {t('speedReader.readingSession')}
                 </h2>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                   {currentText.split(/\s+/).length} {t('pages.index.words')}
                 </div>
               </div>
               <button
                 type="button"
                 onClick={loadNewText}
-                className="flex items-center space-x-2 px-4 py-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                className="flex items-center space-x-2 px-3 sm:px-4 py-2 text-sm sm:text-base text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors w-full sm:w-auto justify-center sm:justify-start"
               >
                 <ArrowLeftIcon className="w-4 h-4" />
                 <span>{t('speedReader.loadNewText')}</span>
@@ -227,23 +227,23 @@ export function MainPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="text-center space-y-4">
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 sm:mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+          <div className="text-center space-y-3 sm:space-y-4">
             <div className="flex items-center justify-center space-x-2">
               <BookOpenIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              <span className="font-semibold text-gray-900 dark:text-white">
+              <span className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
                 Speed Reader
               </span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-4">
               {t('pages.index.footerDesc')}
             </p>
-            <div className="flex justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400 px-4">
               <span>Built with Next.js & React</span>
-              <span>•</span>
+              <span className="hidden sm:inline">•</span>
               <span>RSVP Technology</span>
-              <span>•</span>
+              <span className="hidden sm:inline">•</span>
               <span>Open Source</span>
             </div>
           </div>

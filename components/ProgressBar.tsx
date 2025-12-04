@@ -37,7 +37,7 @@ export function ProgressBar({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-3 sm:p-4">
       {/* Progress Bar */}
       <div className="space-y-3">
         <div className="flex justify-between items-center text-sm">
@@ -71,7 +71,7 @@ export function ProgressBar({
       </div>
 
       {/* Statistics */}
-      <div className="grid grid-cols-3 gap-4 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="text-center">
           <div className="text-lg font-semibold text-gray-900 dark:text-white">
             {currentWPM}
@@ -95,12 +95,12 @@ export function ProgressBar({
       </div>
 
       {/* Quick Navigation */}
-      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 mb-2">
+          <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
             {t('speedReader.quickJump')}
           </span>
-          <div className="flex space-x-1">
+          <div className="flex flex-wrap gap-1 sm:space-x-1 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => onJumpToPosition(0)}
