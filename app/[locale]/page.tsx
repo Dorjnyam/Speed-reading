@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations();
   
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speedreader.app';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speed-read-gamma.vercel.app';
   const title = t('app.title');
   const description = t('pages.index.subtitle');
   const siteName = 'Speed Reader';

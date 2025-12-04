@@ -4,7 +4,7 @@ import { useLocale } from 'next-intl';
 
 export function StructuredData() {
   const locale = useLocale();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speedreader.app';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speed-read-gamma.vercel.app';
   
   const structuredData = {
     '@context': 'https://schema.org',

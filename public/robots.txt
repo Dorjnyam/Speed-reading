@@ -5,5 +5,5 @@ Allow: /
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://speedreader.app/sitemap.xml
+Sitemap: https://speed-read-gamma.vercel.app/sitemap.xml
 

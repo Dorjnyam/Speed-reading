@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speedreader.app';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speed-read-gamma.vercel.app';
 
 export default function robots(): MetadataRoute.Robots {
   return {
